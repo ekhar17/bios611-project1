@@ -21,11 +21,11 @@ This repo will eventually contain an analysis of reviews and qualities of wine a
 
 ## Preliminary figures
 
-![](figures/wineratingbytype.png)
+![](prelimfig/wineratingbytype.png)
 
 The above figure shows a comparison of the average rating of wines by their type. Error bars represent the standard deviation in ratings. It is evident that rose wine has the best reviews out of all the wine types. 
 
-![](figures/top3winebrandratingbytype.png)
+![](prelimfig/top3winebrandratingbytype.png)
 
 When the top three most popular brands that have both red and white wine reviews are compared, it is evident that the type of wine has a large influence on the rating that brand receives.  
 
@@ -53,5 +53,5 @@ The Makefile is an excellent place to look to get a feel for the project.
 To build figures relating to the ratings of wines, for example, enter with Rstudio and say:
 
 
-     > make figures/wineratingbytype.png 
+     > make prelimfig/wineratingbytype.png 
 
