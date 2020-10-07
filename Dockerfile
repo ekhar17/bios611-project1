@@ -1,3 +1,5 @@
 FROM rocker/verse
 MAINTAINER Elena Kharitonova "ekhar@ad.unc.edu"
-RUN echo "Hello World"
+RUN R -e "install.packages('tidytext')"
+RUN R -e "install.packages('gbm')"
+RUN R -e "install.packages('caret')"
