@@ -102,5 +102,53 @@ print(figure2)
 dev.off()
 
 
+########################################################################
+
+redwines = wineswtraits %>% filter(wine_type =="red")
+whitewines = wineswtraits %>% filter(wine_type =="white")
+rosewines = wineswtraits %>% filter(wine_type =="rose")
+otherwines = wineswtraits %>% filter(wine_type =="other wine")
+
+## Figure out for which rating do people recommend
+averagerecommendbyred = c()
+for (i in 1:5){
+  x = filter(redwines, redwines$reviews.rating == i)
+  averagerecommendbyred[i] = mean(x$reviews.doRecommend, na.rm = TRUE)
+}
+averagerecommendbywhite = c()
+for (i in 1:5){
+  x = filter(whitewines, whitewines$reviews.rating == i)
+  averagerecommendbywhite[i] = mean(x$reviews.doRecommend, na.rm = TRUE)
+}
+averagerecommendbyrose = c()
+for (i in 1:5){
+  x = filter(rosewines, rosewines$reviews.rating == i)
+  averagerecommendbyrose[i] = mean(x$reviews.doRecommend, na.rm = TRUE)
+}
+averagerecommendbyothers = c()
+for (i in 1:5){
+  x = filter(otherwines, otherwines$reviews.rating == i)
+  averagerecommendbyothers[i] = mean(x$reviews.doRecommend, na.rm = TRUE)
+}
+averagerecommend = c()
+for (i in 1:5){
+  x = filter(wineswtraits, wineswtraits$reviews.rating == i)
+  averagerecommend[i] = mean(x$reviews.doRecommend, na.rm = TRUE)
+}
 
 
+## Combine all in one data frame
+df = data.frame(Rating = 1:5, red = averagerecommendbyred, white = averagerecommendbywhite, rose = averagerecommendbyrose, other = averagerecommendbyothers, all = averagerecommend)
+
+## Generate figure3 
+figure3 = df %>% tidyr::gather("id", "value", 2:6) %>% 
+  ggplot(., aes(Rating, value))+
+  geom_path(aes(color = id, linetype = id), position = position_dodge(0.4), size = 1) +
+  theme_classic() + 
+  scale_linetype_manual(values=c("dotted","dotted","dotted","dotted","dotted"))
+
+## Save figure3
+png("report1figures/figure3.png")
+print(figure3)
+dev.off()
+  
