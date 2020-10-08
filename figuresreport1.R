@@ -29,7 +29,9 @@ wordsandrating = wordsandrating %>% arrange(desc(mean))
 ## Make graph
 figure1 = ggplot(wordsandrating, aes(x=word, y = mean)) + geom_bar(stat = "identity") +
   geom_errorbar(aes(x=word, ymin=mean- sd, ymax=mean + sd), width=0.3, alpha=0.9, size=.8) + 
-  theme_classic()
+  theme_classic() + labs(title ="Ratings of Wine Based on Word in Review", x = "Word in Review", y = "Average Rating") +
+  theme(text=element_text(size=18)) + 
+  theme(plot.title = element_text(size=25))
 
 ## Generate Figure 1
 png("report1figures/figure1.png", width = 800, height = 600)
@@ -93,7 +95,12 @@ xy = inner_join(x,y, by = "var")
 ## Generate plot
 figure2 = ggplot(data = xy %>% gather(rel.inf.x, rel.inf.y, -var), 
        aes(x = var, y = rel.inf.y, fill = rel.inf.x)) + 
-  geom_bar(stat = 'identity', position = 'dodge') + theme_classic()
+  geom_bar(stat = 'identity', position = 'dodge') + theme_classic() + 
+  labs(title ="Relative Influence of Components on Quality of Wine", x = "Components", y = "Relative Influence") +
+  theme(text=element_text(size=18)) + 
+  theme(plot.title = element_text(size=25))
+  
+
 figure2
 
 ## Save plot
@@ -145,7 +152,10 @@ figure3 = df %>% tidyr::gather("id", "value", 2:6) %>%
   ggplot(., aes(Rating, value))+
   geom_path(aes(color = id, linetype = id), position = position_dodge(0.4), size = 1) +
   theme_classic() + 
-  scale_linetype_manual(values=c("dotted","dotted","dotted","dotted","dotted"))
+  scale_linetype_manual(values=c("dotted","dotted","dotted","dotted","dotted")) +
+  labs(title ="Proportion Recommended vs Rating", x = "Rating", y = "Proportion Recommend") +
+  theme(text=element_text(size=18)) + 
+  theme(plot.title = element_text(size=25))
 
 ## Save figure3
 png("report1figures/figure3.png")
