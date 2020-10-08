@@ -193,8 +193,11 @@ for (i in 3:9){
 alcvsquality = data.frame(quality = c(3:8,3:9), alcohol = c(averagealcred, averagealcwhite), sd = c(sdalcred, sdalcwhite), Wine_Type = c(rep("Red Wine",6), rep("White Wine", 7)))  
 
 ## Generate figure 4
-figure4 = ggplot(alcvsquality, aes(x=quality, y= alcohol, color =Wine_Type))+geom_path()+
-  theme_classic()
+figure4 = ggplot(alcvsquality, aes(x=quality, y= alcohol, color =Wine_Type))+geom_path(size = 1.5)+
+  theme_classic() + labs(title ="Effect of Alcohol Content on Quality of Wine", x = "Quality of Wine", y = "Alcohol Content (% ABV)") +
+  theme(text=element_text(size=18)) + 
+  theme(plot.title = element_text(size=25)) 
+
 figure4
 
 ## Save Figure 4
