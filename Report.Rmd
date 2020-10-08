@@ -1,0 +1,31 @@
+---
+title: "Report"
+author: "Elena Kharitonova"
+date: "10/8/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+One of the most important things that can make or break a nice evening is whether you actually enjoy the wine you are sipping. I have began to notice that my strategy of choosing a wine simply because it has the prettiest label has begun backfiring as although the appearance of the bottle is phenomenal, the taste of the wine itself, most often is not. This has most often caused me to end up buying the same type of wine over and over again because of the knowledge that I will be satisfied with the taste. However, similarly to how one should not eat the same meal for dinner every single night for the rest of their lives, one should also not drink the same wine for the rest of their lives. So I decided to employ data science to aid me in my quest to discover new wines that I enjoy, as I cannot afford to taste test every single wine at Harris Teeter and Trader Joe's.
+
+The datasets I undertake to analyze are publicly available on data.world and have been posted under source_data for convenience. Two of the data sets ([447_1.csv][data1] and wine_reviews.csv) consist solely of the reviews of wines and other alcohol. This data set contains information on the wine brand, the wine name, a rating of the wine, whether the reviewer would recommend this wine, and a review of the wine. It also uses other miscellaneous information such as review date, manufacturing number, reviewers username, and url at which the review was found, which has not been included in the analysis of the data set yet. The other two datasets (winequality-red.csv and winequality-white.csv) contain information on the chemical composition and quality of the wine. These data sets contain information about the alcohol content, the acidity, the amount of sulfur dioxide, the amount of sulphates, the pH, the density, and much more. These data sets will be used in tandem to determine the best wine, I will determine the best wine by taste and learn about how different components of the composition affect the quality. 
+
+# Analysis
+
+The first thing that was done is the reviews were filtered to find the most commonly used words. From here, only words that showed up in more than 20 reviews were included. 
+
+
+![](report1figures/figure1.png)
+![](report1figures/figure2.png)
+
+
+
+and cover the chemical composition and reveiws of wine and other alcohols. They can be downloaded.
+This repo will eventually contain an analysis of reviews and qualities of wine and other alcoholic beverages.
+
+[data1]:https://www.kaggle.com/claudiodavi/superhero-set
