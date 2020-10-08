@@ -195,10 +195,8 @@ alcvsquality = data.frame(quality = c(3:8,3:9), alcohol = c(averagealcred, avera
 ## Generate figure 4
 figure4 = ggplot(alcvsquality, aes(x=quality, y= alcohol, color =Wine_Type))+geom_path(size = 1.5)+
   theme_classic() + labs(title ="Effect of Alcohol Content on Quality of Wine", x = "Quality of Wine", y = "Alcohol Content (% ABV)") +
-  theme(text=element_text(size=18)) + 
-  theme(plot.title = element_text(size=25)) 
-
-figure4
+  theme(text=element_text(size=18)) +
+  scale_color_manual(values=c("dark red", "lightgoldenrod"), name = "Wine Type") +  theme(plot.title = element_text(size=25)) 
 
 ## Save Figure 4
 png("report1figures/figure4.png", width = 800, height = 600)
