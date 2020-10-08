@@ -1,9 +1,5 @@
 .PHONY: clean
 
-clean:
-	rm -f derived_data/*
-	rm -f prelimfig/*.png
-
 Report.pdf:\
  Report.Rmd\
  report1figures/figure1.png\
@@ -12,6 +8,10 @@ Report.pdf:\
  report1figures/figure4.png\
  functions.R
 	Rscript -e "rmarkdown::render('Report.Rmd',output_format='pdf_document')"
+
+clean:
+	rm -f derived_data/*
+	rm -f prelimfig/*.png
 
 report1figures/figure1.png report1figures/figure2.png report1figures/figure3.png report1figures/figure4.png:\
  derived_data/wineswtraits.csv\
