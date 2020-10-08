@@ -4,6 +4,14 @@ clean:
 	rm -f derived_data/*
 	rm -f prelimfig/*.png
 
+Report.pdf:\
+ Report.Rmd\
+ report1figures/figure1.png\
+ report1figures/figure2.png\
+ report1figures/figure3.png\
+ functions.R
+	Rscript -e "rmarkdown::render('Report.Rmd',output_format='pdf_document')"
+
 report1figures/figure1.png report1figures/figure2.png report1figures/figure3.png:\
  derived_data/wineswtraits.csv\
  source_data/winequality-red.csv\
