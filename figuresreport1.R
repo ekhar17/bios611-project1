@@ -147,9 +147,8 @@ for (i in 1:5){
 df = data.frame(Rating = 1:5, "Red Wine" = averagerecommendbyred, "White Wine" = averagerecommendbywhite, "Rose Wine" = averagerecommendbyrose, "Other Wine" = averagerecommendbyothers, "All Wines" = averagerecommend)
 
 ## Generate figure3 
-figure3 = df %>% tidyr::gather("Wine_Type", "value", 2:6) %>% 
-  ggplot(., aes(Rating, value))+
-  geom_path(aes(color = Wine_Type, linetype = Wine_Type), position = position_dodge(0.4), size = 2) +
+figure3 = ggplot(df, aes(Rating, averagerecommend))+
+  geom_path(size = 2, colour = "purple") +
   theme_classic() +
   scale_color_manual(values=c("black", "dark grey", "dark red", "pink", "lightgoldenrod")) + 
   scale_linetype_manual(values=c("dotted","dotted","dotted","dotted","dotted")) +
