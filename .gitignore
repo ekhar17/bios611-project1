@@ -1,6 +1,5 @@
 .local/*
 .rstudio/*
 .active-rstudio-document*
-derived_data/quality.csv*
-derived_data/reviews.csv*
-figures/*.png
+derived_data/wineswtraits.csv*
+report1figures/*.png
