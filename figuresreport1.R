@@ -161,4 +161,43 @@ figure3 = df %>% tidyr::gather("Wine_Type", "value", 2:6) %>%
 png("report1figures/figure3.png")
 print(figure3)
 dev.off()
-  
+
+########################################################################
+
+
+## Generate data for red
+averagealcred = c()
+for (i in 3:8){
+  xyz = filter(winequality_red, winequality_red$quality == i)
+  averagealcred[i-2] = mean(xyz$alcohol, na.rm = TRUE)
+}
+sdalcred = c()
+for (i in 3:8){
+  xyz = filter(winequality_red, winequality_red$quality == i)
+  sdalcred[i-2] = sd(xyz$alcohol, na.rm = TRUE)
+}
+
+## Generate data for white
+averagealcwhite = c()
+for (i in 3:9){
+  xyz = filter(winequality_white, winequality_white$quality == i)
+  averagealcwhite[i-2] = mean(xyz$alcohol, na.rm = TRUE)
+}
+sdalcwhite = c()
+for (i in 3:9){
+  xyz = filter(winequality_white, winequality_white$quality == i)
+  sdalcwhite[i-2] = sd(xyz$alcohol, na.rm = TRUE)
+}
+
+## Combine results
+alcvsquality = data.frame(quality = c(3:8,3:9), alcohol = c(averagealcred, averagealcwhite), sd = c(sdalcred, sdalcwhite), Wine_Type = c(rep("Red Wine",6), rep("White Wine", 7)))  
+
+## Generate figure 4
+figure4 = ggplot(alcvsquality, aes(x=quality, y= alcohol, color =Wine_Type))+geom_path()+
+  theme_classic()
+figure4
+
+## Save Figure 4
+png("report1figures/figure4.png", width = 800, height = 600)
+print(figure4)
+dev.off()
