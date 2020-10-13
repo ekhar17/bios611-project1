@@ -9,22 +9,213 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r, include = FALSE}
+library(tidyverse)
+library(gbm)
+library(MLmetrics)
+library(Rtsne)
+library(cluster)
 ```
 
-## Including Plots
+# 1. Build a glm in R to classifier individuals as either Male or Female based on their weight and height. What is the accuracy of the model?
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+First the data needs to be loaded.
+```{r}
+person = read.csv("500_Person_Gender_Height_Weight_Index.csv")
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Next, we will choose 70% of the data to be used for training the model, 15% of the data for validating the model and tuning the parameters, and 15% of the data for testing the model. Upon inspection, the data in the table appears to be reported in a random order, so we will assign the first 350 entries to the training data set, the next 75 entries to the validation data set, and the last 75 entries to the testing data set. 
+
+```{r}
+set = c(rep("Train", 350), rep("Validate", 75), rep ("Test", 75))
+person = person %>% mutate(set = set)
+```
+
+Next, we need to transform the gender variable into a set of 0's and 1's, so that we can use it in our model. Thus, female will take on the value of 1, and male will take on the value of female
+
+```{r}
+female = person$Gender == "Female"
+person = person %>% mutate(female = female)
+```
+
+
+Next, we build the generalized linear model using the training data set. The summary of the model is displayed below
+
+```{r}
+model.glm <- glm(female ~ Height + Weight, 
+                 person %>% filter(set == "Train"),
+                 family="binomial")
+summary(model.glm)
+```
+
+In order to test the accuracy of our model, we first need to apply our model to the non-training data.
+
+```{r}
+test <- person %>% filter(set != "Train");
+test$female.p <- predict(model.glm, test, type="response")
+```
+
+The accuracy of the model is displayed below. (It is the value on the left). This is compared to the accuracy simplest model possible, which guesses male for all of the data (this is the value on the right.
+
+```{r}
+glm.accur = c(sum((test$female.p>0.5)==test$female)/nrow(test),sum(FALSE==test$female)/nrow(test))
+data.frame("Glm_Accuracy" = glm.accur[1], "Simplest_Model_Accuracy" = glm.accur[2])
+```
+
+Thus our generalized linear model is only slightly superior to the simplest model possible. In fact, if we chose a model that always guessed female, it would have an accuracy of 54%, which would be more accurate than the generalized linear model created.
+
+
+# 2. Use the 'gbm' package to train a similar model. Don't worry about hyper parameter tuning for now. What is the accuracy of the model?
+
+Since the data has already been prepared in step 1 (set has been assigned and gender has been changed to a value of 0's and 1's), this means that we are ready to create a gbm model. The summary of the model is displayed below
+
+```{r}
+model.gbm <- gbm(female ~ Height + Weight,
+                 person %>% filter(set == "Train"),
+                 n.trees = 100,
+                 interaction.depth = 2,
+                 shrinkage=0.1, distribution = "bernoulli")
+summary(model.gbm)
+```
+
+In order to test the accuracy of our model, we first need to apply our model to the non-training data.
+
+```{r, results= "hide"}
+test$female.p1 <- predict(model.gbm, test, type="response")
+```
+
+The accuracy of the model is displayed below. (It is the value on the left). This is compared to the accuracy simplest model possible, which guesses male for all of the data (this is the value on the right.
+
+```{r}
+gbm.accur = c(sum((test$female.p1>0.5)==test$female)/nrow(test),sum(FALSE==test$female)/nrow(test))
+data.frame("GBM_Accuracy" = gbm.accur[1], "Simplest_Model_Accuracy" = gbm.accur[2])
+```
+
+Therefore our GBM model has an accuracy of 53% and does better than the simplest model possible. 
+
+
+# 3. Filter the data set so that it contains only 50 Male examples. Create a new model for this data set. What is the F1 Score of the model?
+
+First we need to make a data set that contains all the females, but only 50 males.
+
+```{r}
+fem = filter(person, female == 1)
+male = filter(person, female == 0)
+
+## Choose 50 males at random
+male = male[sample(nrow(male), 50), ]
+data2 = rbind(fem, male)
+```
+
+
+Next, we will choose 70% of the data to be used for training the model, 15% of the data for validating the model and tuning the parameters, and 15% of the data for testing the model. First we will randomize the order of the data in the data frame, then we will assign the first 213 entries to the training data set, the next 46 entries to the validation data set, and the last 46 entries to the testing data set. 
+
+```{r}
+
+set = c(rep("Train", 213), rep("Validate", 46), rep ("Test", 46))
+## Randomize order of data frame
+data2 = data2[sample(nrow(data2), 305), ]
+
+data2 = data2 %>% mutate(set = set)
+```
+
+Since the gbm model was more accurate in the first data set, a gbm model will be used again on this data set. The summary of the model is displayed below.
+
+```{r}
+model2.gbm <- gbm(female ~ Height + Weight,
+                 data2 %>% filter(set == "Train"),
+                 n.trees = 100,
+                 interaction.depth = 2,
+                 shrinkage=0.1, distribution = "bernoulli")
+summary(model2.gbm)
+
+```
+
+In order to calculate the F1 score, we first need to apply our model to the validation data.
+
+```{r}
+validate <- data2 %>% filter(set == "Validate");
+pred <- predict(model2.gbm, validate, type="response");
+pred0 = pred > 0.5
+
+
+```
+
+Now the F1-score is obtained. Let tp be the true positive rate, let fn be the false negative rate, and let fp be the false positive rate. 
+\[F_1 = \frac{tp}{tp+\frac{1}{2}(fp+fn)}\]
+
+```{r}
+tp = mean(pred0[validate$female])
+fp = mean(pred0[!validate$female])
+fn = mean(1 - pred0[!validate$female])
+
+f1 = tp/(tp+0.5*(fp+fn))
+f1
+```
+
+So the f1 score is 0.667. This makes sense as since there are so few males, our model guesses female for all the subjects.
+
+```{r}
+pred0
+```
+Therefore the true positive and false positive rates are 1 and the true negative and false negative rates are 0, which is why the F1 score is 0.667 or 2/3.
+
+## 4. For the model in the previous example plot an ROC curve. What does this ROC curve mean?
+
+```{r}
+roc <- do.call(rbind, Map(function(threshold){
+    p <- pred > threshold;
+    tp <- sum(p[validate$female])/sum(validate$female);
+    fp <- sum(p[!validate$female])/sum(!validate$female);
+    tibble(threshold=threshold,
+           tp=tp,
+           fp=fp)
+},seq(100)/100))
+
+ggplot(roc, aes(fp,tp)) + geom_line() + xlim(0,1) + ylim(0,1) +
+    labs(title="ROC Curve",x="False Positive Rate",y="True Positive Rate")
+```
+
+This ROC curve shows us that in general as we increase our threshold to be, both our true positive and false positive rate increases. There are three jumps, which makes sense as there are only 3 males in the validate data set. Once a male is included by the threshold, the true positive rate drops, which is not surprising as when a male is identified by the threshold, it makes it more likely that females would be falsely identified as male. 
+
+
+# 5. Using K-Means, cluster the same data set. Can you identify the clusters with the known labels? Provide an interpretation of this result.
+
+This analysis is done using the original data set. First, we determine what the optimal number of clusters is using a gap plot
+```{r, results="hide"}
+results <- clusGap(person %>%
+                 select(Height, Weight, female),
+                 kmeans,
+                 K.max = 10,
+                 B = 500);
+```
+
+
+```{r}
+ggplot(results$Tab %>% as_tibble() %>%
+       mutate(k=seq(nrow(.))), aes(k,gap)) + geom_line();
+```
+
+The peak occurs at k = 3, so three clusters will be used. 
+
+```{r}
+cc<-kmeans(person[,c(2,3,6)],3)
+
+data3 = person[,c(2,3,6)]
+xy = cc$cluster
+xz = duplicated(data3)
+xy = xy[!xz]
+
+fit <- Rtsne(person[!duplicated(person[,c(2,3,6)]),c(2,3,6)], dims = 2)
+
+ggplot(fit$Y %>% as.data.frame() %>% as_tibble() %>% mutate(label=xy),aes(V1,V2)) +
+    geom_point(aes(color=factor(label)))
+
+```
+
+The centers are 
+```{r}
+cc$centers
+```
+This means that there is cluster of those that are tall and light weight (label 1), those that are on the taller side and heavier side (label 2), and those that are short and light (label 3). Almost all centers have a 50% female ratio, which means that the gender cannot be identified by clustering. This is not surprising as the weight and height distributions were generated randomly, so there should be no significant difference between the genders.
