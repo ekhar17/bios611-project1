@@ -65,10 +65,14 @@ It is interesting to note that in general, alcohol content increases as the qual
 
 # Future Analysis
 
-An issue with the data set containing the reviews is that there were very many NA's and it was fairly small. Therefore, a good next step would be finding more data containing reviews of wines off other websites and analyzing those to see if they provide similar recommendations. 
+An issue with the data set containing the reviews is that there were very many NA's and it was fairly small. Therefore, a good next step would be to find more data of wine reviews from other websites and analyze those to see if they have similar key common words and use that to expand what recommendations the function bestwineforme can provide.
 
-Another next step is to add another function that would be able to predict the best wine for your taste, but you can specify the type of wine you want (eg you input one word such as sweet and a wine type such as red). Additionally, the quality ratings in the data set containing the chemical composition of wine has not been compared to the review ratings in the data set containing reviews of wine. These two data sets need to be compared in order to determine if the quality of the wine does improve its rating by an average consumer. 
+Another next step is to add another function that would be able to predict the best wine for one's taste, but one can specify the type of wine that they want (eg. one inputs one word such as sweet and a wine type such as red). 
 
-The linear models trained on the chemical composition data set was used to determine the relative influence, but the efficacy of these models has not been determined. A good next step would be to test the model and determine if there are any more sophisticated types of models that would predict the quality of wine but its chemical composition with greater accuracy.
+The quality ratings in the data set containing the chemical composition of wine have not been compared to the review ratings in the data set containing reviews of wine. Another future direction is to compare the two data sets to determine if the quality of the wine improves its rating by an average consumer. 
 
-Lastly, since a function was developed to predict the best type of wine by somebodies taste, the next step is to test how well this function works by tasting the wine recommended. This function is already in the process of being validated as I have already ordered a bottle of Martini Rossi's Asti Spumante Sparkling Wine to try.
+The gradient boosting machine models trained on the chemical composition data set were used to determine the relative influence, but the efficacy and accuracy of these models has not been determined. A good next step would be to test the model and to compare it to other models to determine if there are any more sophisticated types of models that would predict the quality of wine based its chemical composition with greater accuracy. 
+
+Additionally, since only alcohol content and volatile acidity content were examined to determine the effect they had on wine quality, another future direction would be to examine the partial dependency plots for other chemical components, such as the free sulfur dioxide content. Additionally, dimension reduction will be done to determine which of the chemical composition variables are not useful in determining the quality of the wine and can be removed from the model.
+
+Lastly, since a function was developed to predict the best type of wine based on one's tastes, the next step is to test how well this function works by tasting the wine recommended. This function is already in the process of being validated as I have already ordered a bottle of Martini Rossi's Asti Spumante Sparkling Wine to try.
