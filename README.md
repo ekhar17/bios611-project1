@@ -25,17 +25,6 @@ In order to build the final result, enter with Rstudio and say:
      > make Report.pdf 
 
 
-Makefile
--------
-
-The Makefile is an excellent place to look to get a feel for the project.
-
-To build figures relating to the ratings of wines, for example, enter with Rstudio and say:
-
-
-     > make prelimfig/wineratingbytype.png 
-     
-
 Project Proposal
 -------------------
 
@@ -61,3 +50,14 @@ The above figure shows a comparison of the average rating of wines by their type
 
 When the top three most popular brands that have both red and white wine reviews are compared, it is evident that the type of wine has a large influence on the rating that brand receives.  
 
+
+Makefile
+-------
+
+The Makefile is an excellent place to look to get a feel for the project.
+
+To build figures relating to the ratings of wines, for example, enter with Rstudio and say:
+
+
+     > make prelimfig/wineratingbytype.png 
+     
