@@ -51,7 +51,13 @@ The next step in this analysis was to look into the compositions of wines. I tra
 It is interesting to note that alcohol percentage has the largest influence on the quality of the wine. Since red wines have a tendency to be more dry and more flavorful, it makes sense that volatile acidity (something that contributes to smell) is a bigger influence on the quality of red wine than white.
 
 
-Since alcohol is the largest relative influence for both, it would be interesting to see exactly how the alcohol content affects the quality. For each quality rating, the average alcohol content was calculated for both red wines and white wines and is displayed below. 
+To further examine the effect that alcohol and volatile acidity had on the quality of the wine, two heat maps were generated to see the relationship between alcohol and volatile acidity.
+
+![](report1figures/figure5.png)
+
+It appears that both red and white wines with a lower alcohol content have a lower quality. Additionally, in white wines it appears that a lower volatile acidity leads to a better quality of wine for wines with an alcohol content of 10% ABV or less. For red wines and white wines with an alcohol content of above 10% ABV, there appears to be no obvious trend between volatile acidity content and quality. This is slightly surprising as volatile acidity was found to have a larger relative influence on red wine quality than white wine quality.  
+
+Since alcohol is the largest relative influence for both red wine and white wine quality, it is important to see exactly how the alcohol content affects the quality. For the various levels of alcohol content, the average rating was calculated for both red wines and white wines and is displayed below. 
 
 ![](report1figures/figure4.png)
 
