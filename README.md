@@ -16,7 +16,7 @@ You'll need to build the container:
 This Docker container is based on rocker/verse. To run rstudio server run:
 
     > docker run -v `pwd`:/home/rstudio -p 8787:8787\
-        -e PASSWORD=happy -t project1-env
+        -e PASSWORD="Your Password Here" -t project1-env
         
 Then connect to the machine on port 8787
 
