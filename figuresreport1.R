@@ -218,7 +218,13 @@ winequality$volacid = cut(winequality$volatile.acidity, breaks = c(0, 0.4,0.8,1.
 
 ## Generate Figure 5
 figure5 = ggplot(na.omit(winequality), aes(x=alcohol1, y=volacid, fill= quality)) + 
-  geom_tile()+facet_wrap(~Wine_Type)
+  geom_tile()+facet_wrap(~Wine_Type)+theme_bw() + 
+  labs(title ="Heat Map of Quality of Wine by Alcohol and Volatile Acidity Content", y = "Volatile Acidity (g/L)", x = "Alcohol Content (% ABV)") +
+  theme(text=element_text(size=18), axis.line = element_line(colour = "black"),
+        strip.background = element_rect(fill = "white", color = "black", size = 1),
+        strip.text = element_text(colour = "black"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
 
 ## Save Figure 5
 png("report1figures/figure5.png", width = 800, height = 600)
