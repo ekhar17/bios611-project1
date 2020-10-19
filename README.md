@@ -20,6 +20,11 @@ This Docker container is based on rocker/verse. To run rstudio server run:
         
 Then connect to the machine on port 8787
 
+In order to build the final result, enter with Rstudio and say:
+
+     > make Report.pdf 
+
+
 Makefile
 -------
 
@@ -29,11 +34,6 @@ To build figures relating to the ratings of wines, for example, enter with Rstud
 
 
      > make prelimfig/wineratingbytype.png 
-     
-To build the final report, enter with Rstudio and say:
-
-
-     > make Report.pdf 
      
 
 Project Proposal
