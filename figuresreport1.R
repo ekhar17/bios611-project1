@@ -99,7 +99,7 @@ figure2 = ggplot(data = xy %>% gather(rel.inf.x, rel.inf.y, -var),
   geom_bar(stat = 'identity', position = 'dodge') + theme_classic() + 
   labs(title ="Relative Influence of Components on Quality of Wine", x = "Components", y = "Relative Influence") +
   scale_fill_manual(values=c("dark red", "lightgoldenrod"), name = "Wine Type", labels = c("Red Wine", "White Wine")) + 
-  theme(text=element_text(size=18)) + 
+  theme(text=element_text(size=16)) + 
   theme(plot.title = element_text(size=25)) 
 
 ## Save plot
