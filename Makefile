@@ -14,7 +14,7 @@ clean:
 	rm -f derived_data/*
 	rm -f prelimfig/*.png
 	rm -f report1figures/*.png
-	rm -f report.pdf
+	rm -f Report.pdf
 
 report1figures/figure1.png report1figures/figure2.png report1figures/figure3.png report1figures/figure4.png report1figures/figure5.png:\
  derived_data/wineswtraits.csv\
