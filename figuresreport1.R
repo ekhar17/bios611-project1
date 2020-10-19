@@ -204,11 +204,7 @@ print(figure4)
 dev.off()
 
 #######################################################################################
-pdp_data1 <- partial(gbmFit1, "alcohol", n.trees=100);
-ggplot(pdp_data1, aes(alcohol,yhat)) + geom_line();
 
-pdp_data2 <- partial(gbmFit2, "alcohol", n.trees=100);
-ggplot(pdp_data2, aes(alcohol,yhat)) + geom_line();
 
 ## Combine red and white wine data
 winequality = rbind(winequality_red, winequality_white)
