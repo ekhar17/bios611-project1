@@ -47,7 +47,7 @@ trainIndex <- createDataPartition(winequality_red$quality, p = .8,
                                   times = 1)
 
 
-### Linear Model for red wine
+### Model for red wine
 form <- quality ~ pH +
   alcohol +
   residual.sugar +
@@ -56,7 +56,7 @@ form <- quality ~ pH +
   free.sulfur.dioxide;
 
 
-#Make a generalized linear model
+#Make a gradient boosting model
 train_ctrl <- trainControl(method = "cv", number = 50);
 gbmFit1 <- train(form, data = winequality_red %>% slice(trainIndex), 
                  method = "gbm", 
@@ -71,7 +71,7 @@ x=summary(gbmFit1)
 trainIndex <- createDataPartition(winequality_white$quality, p = .8, 
                                   list = FALSE, 
                                   times = 1)
-# White whine linear model
+# White whine model
 form <- quality ~ pH +
   alcohol +
   residual.sugar +
@@ -79,7 +79,7 @@ form <- quality ~ pH +
   volatile.acidity +
   free.sulfur.dioxide;
 
-## Generate linear model for white wine
+## Generate gradient boosting model for white wine
 train_ctrl <- trainControl(method = "cv", number = 50);
 gbmFit2 <- train(form, data = winequality_white %>% slice(trainIndex), 
                  method = "gbm", 
@@ -200,3 +200,6 @@ figure4 = ggplot(alcvsquality1, aes(y=quality, x= alcohol, color =Wine_Type))+ge
 png("report1figures/figure4.png", width = 800, height = 600)
 print(figure4)
 dev.off()
+
+#######################################################################################
+
