@@ -61,7 +61,7 @@ Since alcohol is the largest relative influence for both red wine and white wine
 
 ![](report1figures/figure4.png)
 
-It is interesting to not that alcohol content increases as the quality of the wine does, however to increase quality from 4 - 5, there is a drop in alcohol content. Further analysis needs to be done to determine if there is a similar trend with the other components. 
+It is interesting to note that in general, alcohol content increases as the quality of the wine does. This agrees with the results found in the heat map. However, as the alcohol content increases from 8% to 9% ABV, the white wine quality decreases slightly, and as the alcohol content increasing from 12% to 13% ABV, there is a decrease in red wine quality. However, despite these small dips, there is still a clear overall relatively linear trend that as alcohol content increases, the quality of the wine increases for both red and white wine. Further analysis needs to be done to determine if there is a similar trend between quality and the other chemical components. 
 
 # Future Analysis
 
