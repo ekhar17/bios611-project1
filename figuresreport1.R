@@ -202,4 +202,25 @@ print(figure4)
 dev.off()
 
 #######################################################################################
+pdp_data1 <- partial(gbmFit1, "alcohol", n.trees=100);
+ggplot(pdp_data1, aes(alcohol,yhat)) + geom_line();
 
+pdp_data2 <- partial(gbmFit2, "alcohol", n.trees=100);
+ggplot(pdp_data2, aes(alcohol,yhat)) + geom_line();
+
+## Combine red and white wine data
+winequality = rbind(winequality_red, winequality_white)
+winequality$Wine_Type = c(rep("Red Wine", 1599), rep("White Wine", 4898))
+
+## Create breaks in data
+winequality$alcohol1 = floor(winequality$alcohol)
+winequality$volacid = cut(winequality$volatile.acidity, breaks = c(0, 0.4,0.8,1.2), labels = c(0.2, 0.6, 1.0))
+
+## Generate Figure 5
+figure5 = ggplot(na.omit(winequality), aes(x=alcohol1, y=volacid, fill= quality)) + 
+  geom_tile()+facet_wrap(~Wine_Type)
+
+## Save Figure 5
+png("report1figures/figure5.png", width = 800, height = 600)
+print(figure5)
+dev.off()
