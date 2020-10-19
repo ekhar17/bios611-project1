@@ -27,7 +27,7 @@ wordsandrating = data.frame(word=word, mean = averageratingbyword, sd = sdrating
 wordsandrating = wordsandrating %>% arrange(desc(mean))
 
 ## Make graph
-figure1 = ggplot(wordsandrating, aes(x=word, y = mean)) + geom_bar(stat = "identity", aes(fill = word)) +
+figure1 = ggplot(wordsandrating, aes(x=word, y = mean)) + geom_bar(stat = "identity", aes(reorder(word,-mean),mean, fill = word)) +
   geom_errorbar(aes(x=word, ymin=mean- sd, ymax=mean + sd), width=0.3, alpha=0.9, size=.8) + 
   theme_classic() + labs(title ="Ratings of Wine Based on Word in Review", x = "Word in Review", y = "Average Rating") +
   theme(text=element_text(size=18)) + 
