@@ -161,41 +161,40 @@ png("report1figures/figure3.png")
 print(figure3)
 dev.off()
 
-########################################################################
 
-
+###########################################################################################################################
 ## Generate data for red
-averagealcred = c()
-for (i in 3:8){
-  xyz = filter(winequality_red, winequality_red$quality == i)
-  averagealcred[i-2] = mean(xyz$alcohol, na.rm = TRUE)
+averagealcred1 = c()
+for (i in 8:14){
+  xyz = filter(winequality_red, floor(winequality_red$alcohol) == i)
+  averagealcred1[i-7] = mean(xyz$quality, na.rm = TRUE)
 }
-sdalcred = c()
-for (i in 3:8){
-  xyz = filter(winequality_red, winequality_red$quality == i)
-  sdalcred[i-2] = sd(xyz$alcohol, na.rm = TRUE)
+sdalcred1 = c()
+for (i in 8:14){
+  xyz = filter(winequality_red, floor(winequality_red$alcohol) == i)
+  sdalcred1[i-7] = sd(xyz$quality, na.rm = TRUE)
 }
 
 ## Generate data for white
-averagealcwhite = c()
-for (i in 3:9){
-  xyz = filter(winequality_white, winequality_white$quality == i)
-  averagealcwhite[i-2] = mean(xyz$alcohol, na.rm = TRUE)
+averagealcwhite1 = c()
+for (i in 8:14){
+  xyz = filter(winequality_white, floor(winequality_white$alcohol) == i)
+  averagealcwhite1[i-7] = mean(xyz$quality, na.rm = TRUE)
 }
-sdalcwhite = c()
-for (i in 3:9){
-  xyz = filter(winequality_white, winequality_white$quality == i)
-  sdalcwhite[i-2] = sd(xyz$alcohol, na.rm = TRUE)
+sdalcwhite1 = c()
+for (i in 8:14){
+  xyz = filter(winequality_red, floor(winequality_red$alcohol) == i)
+  sdalcwhite1[i-7] = sd(xyz$quality, na.rm = TRUE)
 }
 
 ## Combine results
-alcvsquality = data.frame(quality = c(3:8,3:9), alcohol = c(averagealcred, averagealcwhite), sd = c(sdalcred, sdalcwhite), Wine_Type = c(rep("Red Wine",6), rep("White Wine", 7)))  
+alcvsquality1 = data.frame(alcohol = c(8:14,8:14), quality = c(averagealcred1, averagealcwhite1), sd = c(sdalcred1, sdalcwhite1), Wine_Type = c(rep("Red Wine",7), rep("White Wine", 7)))  
 
 ## Generate figure 4
-figure4 = ggplot(alcvsquality, aes(x=quality, y= alcohol, color =Wine_Type))+geom_path(size = 1.5)+
-  theme_classic() + labs(title ="Effect of Alcohol Content on Quality of Wine", x = "Quality of Wine", y = "Alcohol Content (% ABV)") +
+figure4 = ggplot(alcvsquality1, aes(y=quality, x= alcohol, color =Wine_Type))+geom_path(size = 1.5)+
+  theme_classic() + labs(title ="Effect of Alcohol Content on Quality of Wine", y = "Quality of Wine", x = "Alcohol Content (% ABV)") +
   theme(text=element_text(size=18)) +
-  scale_color_manual(values=c("dark red", "lightgoldenrod"), name = "Wine Type") +  theme(plot.title = element_text(size=25)) 
+  scale_color_manual(values=c("dark red", "lightgoldenrod"), name = "Wine Type") +  theme(plot.title = element_text(size=25))
 
 ## Save Figure 4
 png("report1figures/figure4.png", width = 800, height = 600)
