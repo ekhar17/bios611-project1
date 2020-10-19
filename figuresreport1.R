@@ -100,7 +100,9 @@ figure2 = ggplot(data = xy %>% gather(rel.inf.x, rel.inf.y, -var),
   labs(title ="Relative Influence of Components on Quality of Wine", x = "Components", y = "Relative Influence") +
   scale_fill_manual(values=c("dark red", "lightgoldenrod"), name = "Wine Type", labels = c("Red Wine", "White Wine")) + 
   theme(text=element_text(size=16)) + 
-  theme(plot.title = element_text(size=25)) 
+  theme(plot.title = element_text(size=25))+
+  scale_x_discrete(labels=c("alcohol" = "Alcohol", "volatile.acidity" = "Volatile Acidity",
+                            "free.sulfur.dioxide" = "Free Sulfur Dioxide", "pH" = "pH", "fixed.acidity" = "Fixed Acidity", "residual.sugar" = "Residual Sugar"))
 
 ## Save plot
 png("report1figures/figure2.png", width = 800, height = 600)
