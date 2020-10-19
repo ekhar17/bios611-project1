@@ -20,7 +20,7 @@ This Docker container is based on rocker/verse. To run rstudio server run:
         
 Then connect to the machine on port 8787
 
-Proposal
+Project Proposal
 -------------------
 
 ### Introduction
