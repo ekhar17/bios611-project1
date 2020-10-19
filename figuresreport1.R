@@ -157,7 +157,7 @@ figure3 = ggplot(df, aes(Rating, averagerecommend))+
   theme(plot.title = element_text(size=25))
 
 ## Save figure3
-png("report1figures/figure3.png")
+png("report1figures/figure3.png", width = 800, height = 600)
 print(figure3)
 dev.off()
 
