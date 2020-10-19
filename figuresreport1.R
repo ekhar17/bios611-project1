@@ -224,7 +224,8 @@ figure5 = ggplot(na.omit(winequality), aes(x=alcohol1, y=volacid, fill= quality)
         strip.background = element_rect(fill = "white", color = "black", size = 1),
         strip.text = element_text(colour = "black"),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())
+        panel.grid.minor = element_blank()) +
+  scale_fill_gradient(low="light yellow", high="blue")
 
 ## Save Figure 5
 png("report1figures/figure5.png", width = 800, height = 600)
