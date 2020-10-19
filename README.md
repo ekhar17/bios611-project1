@@ -4,6 +4,22 @@ Bios 611 Project 1
 Dataset of Reviews and Qualities of Wine and Other Alcoholic Beverages
 -----------------------------------------
 
+Usage
+-------
+
+You'll need Docker and the ability to run Docker as your current user.
+
+You'll need to build the container:
+
+     > docker build . -t project1-env
+
+This Docker container is based on rocker/verse. To run rstudio server run:
+
+    > docker run -v `pwd`:/home/rstudio -p 8787:8787\
+        -e PASSWORD=happy -t project1-env
+        
+Then connect to the machine on port 8787
+
 Proposal
 -------------------
 
@@ -29,21 +45,6 @@ The above figure shows a comparison of the average rating of wines by their type
 
 When the top three most popular brands that have both red and white wine reviews are compared, it is evident that the type of wine has a large influence on the rating that brand receives.  
 
-Usage
--------
-
-You'll need Docker and the ability to run Docker as your current user.
-
-You'll need to build the container:
-
-     > docker build . -t project1-env
-
-This Docker container is based on rocker/verse. To run rstudio server run:
-
-    > docker run -v `pwd`:/home/rstudio -p 8787:8787\
-        -e PASSWORD=happy -t project1-env
-        
-Then connect to the machine on port 8787
 
 Makefile
 -------
