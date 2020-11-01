@@ -2,8 +2,8 @@ library(tidyverse);
 library(tidytext)
 
 #Load the data
-wine_rev = read_csv('source_data/wine_reviews.csv')
-wine_rev2 = read_csv('source_data/447_1.csv')
+wine_rev = read.csv('source_data/wine_reviews.csv')
+wine_rev2 = read.csv('source_data/447_1.csv')
 winequality_red = read.csv("source_data/winequality-red.csv")
 winequality_white = read.csv("source_data/winequality-white.csv")
 df = subset(wine_rev2, select = -c(quantities,primaryCategories) )
