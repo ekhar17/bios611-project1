@@ -35,5 +35,9 @@ prelimfig/wineratingbytype.png prelimfig/top3winebrandratingbytype.png:\
  prelimfig.R
 	Rscript prelimfig.R
 
+.PHONY: wine_rec
+
+wine_rec: derived_data/wineswtraits.csv Project_2/functions_for_shiny.R
+	Rscript Project_2/app.R $8080
 
 
