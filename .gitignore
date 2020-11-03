@@ -1,5 +1,6 @@
 .local/*
 .rstudio/*
+.cache/*
 .active-rstudio-document*
 derived_data/wineswtraits.csv*
 report1figures/*.png
