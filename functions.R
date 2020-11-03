@@ -1,6 +1,6 @@
 library(tidyverse)
 
-wineswtraits = read.csv('derived_data/wineswtraits.csv')
+wineswtraits = read_csv('derived_data/wineswtraits.csv')
 
 
 ## Function to get mode
