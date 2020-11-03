@@ -24,6 +24,13 @@ In order to build the final result, enter with Rstudio and say:
 
      > make Report.pdf 
 
+In order to run the interactive R Shiny Component of this project, run:
+
+    > docker run -p 8080:8080 -v `pwd`:/home/rstudio \
+        -it project1-env sudo -H -u rstudio /bin/bash -c \
+        "cd ~/; PORT=8080 make wine_rec"
+
+Then connect to the machine on port 8080
 
 Project Proposal
 -------------------
