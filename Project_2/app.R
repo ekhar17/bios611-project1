@@ -3,6 +3,9 @@ library(tidyverse)
 library(DT)
 source("Project_2/functions_for_shiny.R")
 
+args <- commandArgs(trailingOnly=TRUE);
+port <- args[1] %>% as.numeric();
+
 CapStr <- function(y) {
     c <- strsplit(y, " ")[[1]]
     paste(toupper(substring(c, 1,1)), substring(c, 2),
@@ -84,4 +87,4 @@ server <- function(input, output) {
 
 
 # Run the application 
-shinyApp(ui=ui,server=server, options=list(port=8080, host="0.0.0.0"))
+shinyApp(ui=ui,server=server, options=list(port=port, host="0.0.0.0"))
