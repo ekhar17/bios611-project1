@@ -32,6 +32,7 @@ In order to run the interactive R Shiny Component of this project, run:
 
 Then connect to the machine on port 8081
 
+
 Project Proposal
 -------------------
 
@@ -68,3 +69,12 @@ To build figures relating to the ratings of wines, for example, enter with Rstud
 
      > make prelimfig/wineratingbytype.png 
      
+Troubleshooting
+---------------   
+     
+Sometimes there are issues with the rstudio image. If this is the case run the following code:
+
+     > rm -rf .cache
+     > rm -rf .local
+     > rm -rf .rstudio/
+
