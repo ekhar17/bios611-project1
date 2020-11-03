@@ -45,8 +45,8 @@ ui <- fluidPage(
         # Show a plot of the generated distribution
         mainPanel(
                 h4("This shiny app provides a wine recommendation based on a word that the user chooses to describe the wine.
-               This word was used in reviews left by users to describe the wine. The shiny app provides a recommendation based
-               on the highest rated wine that whose review includes that characteristic. It also displays the average wine rating for that characteristic and wine type."),
+               This word was used in reviews to describe the wine. The shiny app provides a recommendation based
+               on the highest rated wine whose reviews included that word. The app also displays the average wine rating for that characteristic and wine type."),
             DT::dataTableOutput("mytable"),
             plotOutput(outputId = "distPlot")
             )
