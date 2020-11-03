@@ -1,5 +1,6 @@
 .PHONY: clean
 
+# This target makes the final Report
 Report.pdf:\
  Report.Rmd\
  report1figures/figure1.png\
@@ -16,6 +17,7 @@ clean:
 	rm -f report1figures/*.png
 	rm -f Report.pdf
 
+# This target makes the figures for report1
 report1figures/figure1.png report1figures/figure2.png report1figures/figure3.png report1figures/figure4.png report1figures/figure5.png:\
  derived_data/wineswtraits.csv\
  source_data/winequality-red.csv\
@@ -23,12 +25,14 @@ report1figures/figure1.png report1figures/figure2.png report1figures/figure3.png
  figuresreport1.R
 	Rscript figuresreport1.R
 
+# This target makes the cleaned data
 derived_data/wineswtraits.csv:\
  source_data/447_1.csv\
  source_data/wine_reviews.csv\
  tidy_data.R
 	Rscript tidy_data.R
  
+# This target makes the preliminary figures used in the README
 prelimfig/wineratingbytype.png prelimfig/top3winebrandratingbytype.png:\
  source_data/447_1.csv\
  source_data/wine_reviews.csv\
@@ -37,7 +41,9 @@ prelimfig/wineratingbytype.png prelimfig/top3winebrandratingbytype.png:\
 
 .PHONY: wine_rec
 
+# This target starts the shiny app
+# Don't forget to invoke with the desired port number in an ENV variable
 wine_rec: derived_data/wineswtraits.csv Project_2/functions_for_shiny.R
-	Rscript Project_2/app.R $8080
+	Rscript Project_2/app.R ${PORT}
 
 
