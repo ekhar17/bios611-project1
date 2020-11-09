@@ -32,11 +32,6 @@ In order to run the interactive R Shiny Component of this project, run:
 
 Then connect to the machine on port 8081
 
-R Shiny Portion
------------------
-
-The interactive R Shiny Component of this project is a function that accepts two words as input and determines what is the best wine with both of those characteristics based on the obtained reviews. One of the words is a description of the wine (sweet, price, smooth, dry, light, fruit, cheap, flavorful, or affordable) and the other word is a type of wine (red, white, rose, other wine, or display for all types of wine). Additionally, for the two words chosen, the shiny app creates a graph that displays the average rating given to wines whose reviews include both of those words with error bars that represent the standard deviation. The code for the app can be found in the Project_2 folder. 
-
 
 Project Proposal
 -------------------
@@ -63,6 +58,10 @@ The above figure shows a comparison of the average rating of wines by their type
 
 When the top three most popular brands that have both red and white wine reviews are compared, it is evident that the type of wine has a large influence on the rating that brand receives.  
 
+R Shiny Portion
+-----------------
+
+The interactive R Shiny Component of this project is a function that accepts two words as input and determines what is the best wine with both of those characteristics based on the obtained reviews. One of the words is a description of the wine (sweet, price, smooth, dry, light, fruit, cheap, flavorful, or affordable) and the other word is a type of wine (red, white, rose, other wine, or display for all types of wine). Additionally, for the two words chosen, the shiny app creates a graph that displays the average rating given to wines whose reviews include both of those words with error bars that represent the standard deviation. The code for the app can be found in the Project_2 folder. 
 
 Makefile
 -------
