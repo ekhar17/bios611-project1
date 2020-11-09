@@ -1,5 +1,5 @@
-Bios 611 Project 1
-==================
+Bios 611 Project
+================
 
 Dataset of Reviews and Qualities of Wine and Other Alcoholic Beverages
 -----------------------------------------
@@ -31,6 +31,11 @@ In order to run the interactive R Shiny Component of this project, run:
         "cd ~/; PORT=8081 make wine_rec"
 
 Then connect to the machine on port 8081
+
+R Shiny Portion
+-----------------
+
+The interactive R Shiny Component of this project is a function that accepts two words as input and determines what is the best wine with both of those characteristics based on the obtained reviews. One of the words is a description of the wine (sweet, price, smooth, dry, light, fruit, cheap, flavorful, or affordable) and the other word is a type of wine (red, white, rose, other wine, or display for all types of wine). Additionally, for the two words chosen, the shiny app creates a graph that displays the average rating given to wines whose reviews include both of those words with error bars that represent the standard deviation. The code for the app can be found in the Project_2 folder. 
 
 
 Project Proposal
