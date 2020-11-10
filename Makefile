@@ -20,7 +20,14 @@ clean:
 	rm -f pythonfigure/*.png
 	rm -f Report.pdf
 
-# This target makes the figures for report1
+# This target makes the python figures for report1
+pythonfigure/red_wine_partial_dependency.png pythonfigure/white_wine_partial_dependency.png:\
+ source_data/winequality-red.csv\
+ source_data/winequality-white.csv\
+ integration_fig_gen.py
+	python3 integration_fig_gen.py
+
+# This target makes the R figures for report1
 report1figures/figure1.png report1figures/figure2.png report1figures/figure3.png report1figures/figure4.png report1figures/figure5.png:\
  derived_data/wineswtraits.csv\
  source_data/winequality-red.csv\
