@@ -8,6 +8,8 @@ Report.pdf:\
  report1figures/figure3.png\
  report1figures/figure4.png\
  report1figures/figure5.png\
+ pythonfigure/red_wine_partial_dependency.png\
+ pythonfigure/white_wine_partial_dependency.png\
  functions.R
 	Rscript -e "rmarkdown::render('Report.Rmd',output_format='pdf_document')"
 
@@ -15,6 +17,7 @@ clean:
 	rm -f derived_data/*
 	rm -f prelimfig/*.png
 	rm -f report1figures/*.png
+	rm -f pythonfigure/*.png
 	rm -f Report.pdf
 
 # This target makes the figures for report1
