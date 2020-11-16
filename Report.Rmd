@@ -76,3 +76,18 @@ The gradient boosting machine models trained on the chemical composition data se
 Additionally, since only alcohol content and volatile acidity content were examined to determine the effect they had on wine quality, another future direction would be to examine the partial dependency plots for other chemical components, such as the free sulfur dioxide content. Additionally, dimension reduction will be done to determine which of the chemical composition variables are not useful in determining the quality of the wine and can be removed from the model.
 
 Lastly, since a function was developed to predict the best type of wine based on one's tastes, the next step is to test how well this function works by tasting the wine recommended. This function is already in the process of being validated as I have already ordered a bottle of Martini Rossi's Asti Spumante Sparkling Wine to try.
+
+\newpage 
+
+# Project 3 - Python Figure
+
+As opposed to simply modeling how average wine quality changes for various alcohol content levels, a partial dependency plot was created to further understand the relationship between alcohol content and wine quality as well as the relationship between volatile acidity content and wine quality for both white and red wine. 
+
+![](pythonfigure/white_wine_partial_dependency.png){ height=60%, width=60% } 
+
+![](pythonfigure/red_wine_partial_dependency.png){ height=60%, width=60% } 
+
+Although the alcohol content partial dependency plots are jagged and not strictly linear, they both appear to follow a fairly linear positive trend. This demonstrates that increasing alcohol content does linearly increase wine quality, as was suggested in Part 1 of the Report. 
+
+Interestingly, volatile acidity content has almost the opposite effect. As volatile acidity content increases, the wine quality decreases for both white wine and red wine. For red wine, the trend is fairly linear but for white wine, the trend is more similar to an exponential decay. This is surprising because I would assume that volatile acidity adds to the aroma of a wine, which would increase its quality. However, based on the partial dependency plot, it is more likely that volatile acidity adds an unwanted aroma, which is why it should be minimized in order to improve wine quality. 
+
